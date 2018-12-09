@@ -23,4 +23,86 @@ class Space {
 
     document.getElementById("mask").appendChild(svgSpace);
   }
+
+  // Updates space to reflect a token has been dropped into it.
+  // @param {Object} token - The dropped token.
+  mark(token) {
+    this.token = token;
+  }
+
+  // Checks if space has an associated token to find its owner
+  // @return {{null|Object}} Returns null or the owner object of the space's associated token.
+  get owner() {
+    if (this.token !== null) {
+      return this.token.owner;
+    } else {
+      return null;
+    }
+  }
+
+  // Checks if there's a winner on the board after eack token drop.
+  // @param {Object} Targeted space for dropped token.
+  // @return {boolean} Booloean value indicating whether the game has been won (true) or not (false).
+  checkForWin(owner) {
+    const owner = target.token.owner;
+    let win = false;
+
+    // vertical
+    for (let x = 0; x < this.board.columns; x++) {
+      for (let y = 0; y < this.board.rows - 3; y++) {
+        if (
+          this.board.spaces[x][y].owner === owner &&
+          this.spaces[x][y + 1].owner === owner &&
+          this.board.spaces[x][y + 2].owner === owner &&
+          this.board.spaces[x][y + 3].owner === owner
+        ) {
+          win = true;
+        }
+      }
+    }
+
+    // hortizontal
+    for (let x = 0; x < this.board.columns - 3; x++) {
+      for (let y = 0; y < this.board.rows; y++) {
+        if (
+          this.board.spaces[x][y].owner === owner &&
+          this.board.spaces[x + 1][y].owner === owner &&
+          this.board.spaces[x + 2][y].owner === owner &&
+          this.board.spaces[x + 3][y].owner === owner
+        ) {
+          win = true;
+        }
+      }
+    }
+
+    // diagonal
+    for (let x = 3; x < this.board.columns; x++) {
+      for (let y = 0; y < this.board.rows - 3; y++) {
+        if (
+          this.board.spaces[x][y].owner === owner &&
+          this.board.spaces[x - 1][y + 1].owner === owner &&
+          this.board.spaces[x - 2][y + 2].owner === owner &&
+          this.board.spaces[x - 3][y + 3].owner === owner
+        ) {
+          win = true;
+        }
+      }
+    }
+
+    // diagonal
+    for (let x = 3; x < this.board.columns; x++) {
+      for (let y = 3; y < this.board.rows; y++) {
+        if (
+          this.board.spaces[x][y].owner === owner &&
+          this.board.spaces[x - 1][y - 1].owner === owner &&
+          this.board.spaces[x - 2][y - 2].owner === owner &&
+          this.board.spaces[x - 3][y - 3].owner === owner
+        ) {
+          win = true;
+        }
+      }
+    }
+
+    return win;
+  }
 }

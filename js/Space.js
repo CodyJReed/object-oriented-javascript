@@ -9,7 +9,7 @@ class Space {
   }
 
   drawSVGSpace() {
-    const svgSpace = document.getElementNS(
+    const svgSpace = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "circle"
     );

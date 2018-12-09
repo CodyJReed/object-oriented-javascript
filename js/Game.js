@@ -14,7 +14,11 @@ class Game {
   }
 
   // Gets game ready to play
-  startGame() {}
+  startGame() {
+    this.board.drawHTMLBoard();
+    this.activePlayer.activeToken.drawHTMLToken();
+    this.ready = true;
+  }
 
   get activePlayer() {
     return this.players.find(player => player.active);

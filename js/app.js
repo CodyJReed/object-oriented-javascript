@@ -2,7 +2,7 @@ const game = new Game();
 
 const beginGame = document.getElementById("begin-game");
 
-beginGame.addEventListener("click", () => {
+beginGame.addEventListener("click", function() {
   game.startGame();
 
   this.style.display = "none";

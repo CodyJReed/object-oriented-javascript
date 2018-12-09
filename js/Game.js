@@ -30,10 +30,10 @@ class Game {
     if (this.ready) {
       switch (e.key) {
         case "ArrowLeft":
-          null;
+          this.activePlayer.activeToken.moveLeft();
           break;
         case "ArrowRight":
-          null;
+          this.activePlayer.activeToken.moveRight(this.board.columns);
           break;
         case "ArrowDown":
           null;

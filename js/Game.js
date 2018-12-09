@@ -36,11 +36,31 @@ class Game {
           this.activePlayer.activeToken.moveRight(this.board.columns);
           break;
         case "ArrowDown":
-          null;
+          this.playToken();
           break;
         default:
+          null;
           break;
       }
+    }
+  }
+
+  // Finds Space object to drop token into, drops Token
+  playToken() {
+    let spaces = this.board.spaces;
+    let activeToken = this.activePlayer.activeToken;
+    let targetColumn = spaces[activeToken.columnLocation];
+    let targetSpace = null;
+
+    for (let space of targetColumn) {
+      if (space.token === null) {
+        targetSpace = space;
+      }
+    }
+
+    if (targetSpace !== null) {
+      game.ready = false;
+      activeToken.drop(targetSpace);
     }
   }
 }

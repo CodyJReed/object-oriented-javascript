@@ -17,7 +17,7 @@ class Token {
   }
 
   get htmlToken() {
-    return underlay;
+    return document.getElementById(this.id);
   }
 
   // Gets left offset of html element.

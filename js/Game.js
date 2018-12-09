@@ -12,4 +12,7 @@ class Game {
     ];
     return players;
   }
+
+  // Gets game ready to play
+  startGame() {}
 }

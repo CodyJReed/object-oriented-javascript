@@ -1,7 +1,7 @@
 class Board {
-  constructor(rows, columns) {
-    this.rows = rows;
-    this.columns = columns;
+  constructor() {
+    this.rows = 6;
+    this.columns = 7;
     this.spaces = [];
   }
 }

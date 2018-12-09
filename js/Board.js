@@ -25,8 +25,10 @@ class Board {
   }
 
   drawHTMLBoard() {
-    for (let i = 0; i < this.spaces.length; i++) {
-      drawSVGSpace(spaces[i]);
+    for (let column of this.spaces) {
+      for (let space of column) {
+        space.drawSVGSpace();
+      }
     }
   }
 }

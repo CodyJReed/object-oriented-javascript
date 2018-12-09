@@ -23,4 +23,24 @@ class Game {
   get activePlayer() {
     return this.players.find(player => player.active);
   }
+
+  // Branches code, depending on what key player presses
+  // @param {Object} e - Keydown event object
+  handleKeydown(e) {
+    if (this.ready) {
+      switch (e.key) {
+        case "ArrowLeft":
+          null;
+          break;
+        case "ArrowRight":
+          null;
+          break;
+        case "ArrowDown":
+          null;
+          break;
+        default:
+          break;
+      }
+    }
+  }
 }

@@ -16,5 +16,7 @@ class Token {
       .style.backGroundColor(this.owner.color);
   }
 
-  get htmlToken() {}
+  get htmlToken() {
+    return underlay;
+  }
 }

@@ -60,7 +60,9 @@ class Game {
 
     if (targetSpace !== null) {
       game.ready = false;
-      activeToken.drop(targetSpace);
+      activeToken.drop(targetSpace, () => {
+        game.updateGameState(activeToken, targetSpace);
+      });
     }
   }
   // Checks if there's a winner on the board after eack token drop.
@@ -75,7 +77,7 @@ class Game {
       for (let y = 0; y < this.board.rows - 3; y++) {
         if (
           this.board.spaces[x][y].owner === owner &&
-          this.spaces[x][y + 1].owner === owner &&
+          this.board.spaces[x][y + 1].owner === owner &&
           this.board.spaces[x][y + 2].owner === owner &&
           this.board.spaces[x][y + 3].owner === owner
         ) {
@@ -145,5 +147,25 @@ class Game {
   gameOver(message) {
     document.getElementById("game-over").style.display = "block";
     document.getElementById("game-over").textContent = message;
+  }
+
+  // Updates game state after token is dropped.
+  // @param {Object} token - The token that's being dropped.
+  // @param {Object} target - Targeted space for dropped token.
+  updateGameState(token, target) {
+    target.mark(token);
+
+    if (!this.checkForWin(target)) {
+      this.switchPlayers();
+
+      if (this.activePlayer.checkTokens()) {
+        this.activePlayer.activeToken.drawHTMLToken();
+        this.ready = true;
+      } else {
+        this.gameOver("No more tokens");
+      }
+    } else {
+      this.gameOver(`${target.owner.name} wins!`);
+    }
   }
 }
